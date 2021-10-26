@@ -158,7 +158,7 @@ endif ()
 # Install Qml plugin as found here https://github.com/4rtzel/cmake-qml-plugin-example/issues/1
 set(URI Ros)
 string(REPLACE "." "/" TARGETPATH ${URI})
-execute_process(COMMAND qmake -qt5 -query QT_INSTALL_QML OUTPUT_VARIABLE QT_INSTALL_QML_RAW)
+execute_process(COMMAND qmake -query QT_INSTALL_QML OUTPUT_VARIABLE QT_INSTALL_QML_RAW)
 string(REPLACE "\n" "" QT_INSTALL_QML ${QT_INSTALL_QML_RAW})
 if ("${QT_INSTALL_QML}" STREQUAL "**Unknown**")
   message(FATAL_ERROR "Could not find qml plugin dir. Is qml installed?")
