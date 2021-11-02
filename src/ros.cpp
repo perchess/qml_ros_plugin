@@ -92,9 +92,17 @@ QStringList RosQml::queryTopics( const QString &datatype ) const
   return result;
 }
 
-void RosQml::setStrParam( const QString &name, const QString &param) const
+void RosQml::setParam( const QString &name, const QString &param) const
 {
   ros::param::set(name.toStdString(), param.toStdString());
+}
+void RosQml::setParam( const QString &name, const double &param) const
+{
+  ros::param::set(name.toStdString(), param);
+}
+void RosQml::setParam( const QString &name, const int &param) const
+{
+  ros::param::set(name.toStdString(), param);
 }
 
 QList<TopicInfo> RosQml::queryTopicInfo() const
@@ -289,9 +297,14 @@ QStringList RosQmlSingletonWrapper::queryTopics( const QString &datatype ) const
   return RosQml::getInstance().queryTopics( datatype );
 }
 
-void RosQmlSingletonWrapper::setStrParam( const QString &name, const QString &param) const
+void RosQmlSingletonWrapper::setParam( const QString &name, const QVariant &param) const
 {
-  RosQml::getInstance().setStrParam( name, param );
+  if (param.type() == QMetaType::QString)
+    RosQml::getInstance().setParam( name, param.toString() );
+  if (param.type() == QMetaType::Double)
+    RosQml::getInstance().setParam( name, param.toDouble() );
+  if (param.type() == QMetaType::Int)
+    RosQml::getInstance().setParam( name, param.toInt() );
 }
 
 QList<TopicInfo> RosQmlSingletonWrapper::queryTopicInfo() const { return RosQml::getInstance().queryTopicInfo(); }
