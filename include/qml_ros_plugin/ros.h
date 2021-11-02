@@ -110,6 +110,13 @@ public:
   QStringList queryTopics( const QString &datatype = QString()) const;
 
   /*!
+   * Queries the ROS master for its topics or using the optional datatype parameter for all topics with the given type.
+   * @param name Full parametr name.
+   * @param param Ros parametr to be set.
+   */
+  void setStrParam( const QString &name, const QString &param) const;
+
+  /*!
    * Queries the ROS master for its topics and their type.
    * @return A list of TopicInfo.
    */
@@ -229,6 +236,9 @@ public:
 
   //! @copydoc RosQml::queryTopics
   Q_INVOKABLE QStringList queryTopics( const QString &datatype = QString()) const;
+
+  //! @copydoc RosQml::setStrParam
+  Q_INVOKABLE void setStrParam( const QString &name, const QString &param) const;
 
   //! @copydoc RosQml::queryTopicInfo
   Q_INVOKABLE QList<TopicInfo> queryTopicInfo() const;

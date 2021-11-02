@@ -92,6 +92,11 @@ QStringList RosQml::queryTopics( const QString &datatype ) const
   return result;
 }
 
+void RosQml::setStrParam( const QString &name, const QString &param) const
+{
+  ros::param::set(name.toStdString(), param.toStdString());
+}
+
 QList<TopicInfo> RosQml::queryTopicInfo() const
 {
   ros::master::V_TopicInfo topic_info;
@@ -282,6 +287,11 @@ QString RosQmlSingletonWrapper::getNamespace()
 QStringList RosQmlSingletonWrapper::queryTopics( const QString &datatype ) const
 {
   return RosQml::getInstance().queryTopics( datatype );
+}
+
+void RosQmlSingletonWrapper::setStrParam( const QString &name, const QString &param) const
+{
+  RosQml::getInstance().setStrParam( name, param );
 }
 
 QList<TopicInfo> RosQmlSingletonWrapper::queryTopicInfo() const { return RosQml::getInstance().queryTopicInfo(); }
