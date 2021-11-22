@@ -49,6 +49,12 @@ enum RosInitOption
 Q_ENUM_NS( RosInitOption )
 }
 
+//template <typename T>
+//void setParam( const QString &name, const T &param) const
+//{
+//  ros::param::set(name.toStdString(), param);
+//}
+
 class RosQml : public QObject
 {
 Q_OBJECT
@@ -117,6 +123,9 @@ public:
   void setParam( const QString &name, const QString &param) const;
   void setParam( const QString &name, const double &param) const;
   void setParam( const QString &name, const int &param) const;
+  void setParam( const QString &name, const bool &param) const;
+//  template <typename T>
+//  void setParam( const QString &name, const T &param) const;
 
   /*!
    * Queries the ROS master for its topics and their type.

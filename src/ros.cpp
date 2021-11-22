@@ -104,6 +104,16 @@ void RosQml::setParam( const QString &name, const int &param) const
 {
   ros::param::set(name.toStdString(), param);
 }
+void RosQml::setParam( const QString &name, const bool &param) const
+{
+  ros::param::set(name.toStdString(), param);
+}
+//template <typename T>
+//void RosQml::setParam( const QString &name, const T &param) const
+//{
+//  ros::param::set(name.toStdString(), param);
+//}
+
 
 QList<TopicInfo> RosQml::queryTopicInfo() const
 {
@@ -305,6 +315,8 @@ void RosQmlSingletonWrapper::setParam( const QString &name, const QVariant &para
     RosQml::getInstance().setParam( name, param.toDouble() );
   if (param.type() == QMetaType::Int)
     RosQml::getInstance().setParam( name, param.toInt() );
+  if (param.type() == QMetaType::Bool)
+    RosQml::getInstance().setParam( name, param.toBool() );
 }
 
 QList<TopicInfo> RosQmlSingletonWrapper::queryTopicInfo() const { return RosQml::getInstance().queryTopicInfo(); }
